@@ -9,6 +9,7 @@ class TableTrajets:
         un dataframe avec les trajets
     type : str
         Vaut "TGV" ou "TER". Peut être génant par la suite...
+        ...remplacer par ["TGV"],["TER"],ou["TGV","TER"]
     """
     
     def __init__(self,type):
