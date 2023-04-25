@@ -1,6 +1,11 @@
 from dijkstra_source_vers_destination import dijkstra_source_vers_destination
-import numpy as np
+import pandas as pd
 
-graphe = [np.array([[0, 50, 100],[50, 0, 30]], [100,30,0]),{"Paris":"Paris" ,"Lyon" :"Lyon","Marseille":"Marseille"}]
+graphe = pd.DataFrame({'origine' : ["PARIS ","PARIS","LYON"],
+                     'code_origine' : ['1','1','2'],
+                     'destination' : ["LYON ","MARSEILLE","MARSEILLE"],
+                     'code_destination' : ['2','3','3'],
+                     'prix' : [50,100,30]}
+                    )
 
-dijkstra_source_vers_destination(graphe,"Paris","Marseille")
+dijkstra_source_vers_destination(graphe,"PARIS","MARSEILLE")

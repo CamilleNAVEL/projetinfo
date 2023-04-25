@@ -30,10 +30,10 @@ def dijkstra_source_vers_destination(self, origine, destination):
         # On marque la 'selection'
         parcours.append(selection)
         # On parcours les voisins de 'selection'
-        for voisin in self[selection]:
-            # voisin est le couple (sommet, poids de l'arête)
-            sommet = voisin[0]  # Le sommet qu'on, parcours
-            poids = voisin[1]  # Le poids de selection au sommet
+        for voisin in self.origine[selection]:
+            # voisin est le tuple (origine, code_origine, destination , code_destination , prix)
+            sommet = voisin.origine  # Le sommet qu'on, parcours
+            poids = voisin.prix  # Le poids de selection au sommet
             # voir ici comment on accède aux données du graphe
             if sommet not in parcours:
                 # Pour chaque voisin non marqué,
