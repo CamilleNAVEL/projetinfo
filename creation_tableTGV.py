@@ -1,4 +1,5 @@
 import pandas as pd
+import os
 
 def creation_tableTGV():
     """Création de la table des trajets TGV.

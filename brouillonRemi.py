@@ -1,5 +1,6 @@
 import __init__
-
+import pandas as pd
+import numpy as np
 import tableTrajets
 
 trajets = TableTrajets('TGV')
@@ -27,3 +28,22 @@ tableTGV.columns
 
 pouet = pd.concat([tableTGV,tableTER,tableCorrespondances])
 pouet.columns
+
+
+pouet=creation_tableTGV()
+
+
+
+garesParis=pouet[pouet['origine'].str.contains("PARIS")][["origine","code_origine"]]
+
+garesParis.drop_duplicates(keep = 'first', inplace=True)
+
+garesParisDest = garesParis
+
+garesParisDest.rename(columns = {"origine" : "destination",
+                                          "code_origine" : "code_destination"
+                                          })
+
+# faire un produit cartesien puis virer les trajets nuls
+
+garesParis.merge(garesParisDest, how='cross')
