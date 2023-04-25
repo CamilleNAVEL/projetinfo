@@ -1,7 +1,7 @@
 import pandas as pd
 
-def creation_tableCorrespondances():
-    """Création de la table des correspondnaces.
+def creation_tableTGV():
+    """Création de la table des trajets TGV.
     A faire en deux étapes ?
 
     Returns
@@ -11,12 +11,21 @@ def creation_tableCorrespondances():
         Gare destination - code UIC, Prix
     """
     # Il va falloir reflechir. Relier gare de Massy et autres d'idf
+    tableTGV = pd.read_csv(os.path.join("data","tarifs-tgv-inoui-ouigo.csv"),sep=";")
+    tableTGV.columns = [c.replace(' ','_') for c in tableTGV.columns]
     
-    df=pd.DataFrame({'origine' : ["PARIS GARE DE LYON","PARIS GARE DE LYON","PARIS GARE DE LYON"],
-                     'code_origine' : ['87686006','87686006','87686006'],
-                     'destination' : ['PARIS EST','GARE PARIS NORD','GARE PARIS MONTPARNASSE'],
-                     'code_destination' : ['87113001','87271007','87391102'],
-                     'prix' : [1.5,1.5,1.5]}
-                    )
+    tableTGV = tableTGV.rename(columns = {"Transporteur" : "transporteur",
+                                          "Gare_origine" : "origine",
+                                          "Gare_origine_-_code_UIC" : "code_origine",
+                                          "Destination" : "destination",
+                                          "Gare_destination_-_code_UIC" : "code_destination",
+                                          "Classe" : "classe",
+                                          "Profil_tarifaire" : "tarif_profil",
+                                          })
+        
+        # df = df [["origine","code_origine","destination","code_destination","prix"]]
+        
+    tableTGV['type'] = 'TGV'
+
     
-    return(df)
+    return(tableTGV)
