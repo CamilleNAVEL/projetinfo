@@ -19,4 +19,6 @@ def creation_tableCorrespondances():
                      'prix' : [1.5,1.5,1.5]}
                     )
     
+    df['type']="correspondance"
+    
     return(df)
