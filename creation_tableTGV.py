@@ -14,14 +14,18 @@ def creation_tableTGV():
     tableTGV = pd.read_csv(os.path.join("data","tarifs-tgv-inoui-ouigo.csv"),sep=";")
     tableTGV.columns = [c.replace(' ','_') for c in tableTGV.columns]
     
-    tableTGV.rename(columns = {"Gare_origine" : "origine",
-                                  "Gare_origine_-_code_UIC" : "code_origine",
-                                  "Destination" : "destination",
-                                  "Gare_destination_-_code_UIC" : "code_destination"})
+    tableTGV = tableTGV.rename(columns = {"Transporteur" : "transporteur",
+                                          "Gare_origine" : "origine",
+                                          "Gare_origine_-_code_UIC" : "code_origine",
+                                          "Destination" : "destination",
+                                          "Gare_destination_-_code_UIC" : "code_destination",
+                                          "Classe" : "classe",
+                                          "Profil_tarifaire" : "tarif_profil",
+                                          })
         
         # df = df [["origine","code_origine","destination","code_destination","prix"]]
         
-    tableTGV.type = 'TGV'
+    tableTGV['type'] = 'TGV'
 
     
     return(tableTGV)
