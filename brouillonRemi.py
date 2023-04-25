@@ -18,3 +18,5 @@ t3.table
 "DIJONh VILLE" in set(trajets.table.origine)
 
 set(t2.table.code_origine).union(set(t2.table.code_destination))
+
+creation_tableCorrespondances()
