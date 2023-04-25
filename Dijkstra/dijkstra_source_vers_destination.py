@@ -1,16 +1,18 @@
-from tabletrajet import tabletrajet
+from math import inf
 def dijkstra_source_vers_destination(self, origine, destination):
     """
-    Applique l’algo de Dijkstra de l’origine aux sommets du graphe.
+    Applique l’algo de Dijkstra pour relier à moindre coût origine à destination.
     Arguments
-    graphe : graphe
+    graphe : Graphe
     le graphe des trajets.
     origine : str
     Code UIC de la gare d’origine.
+    Destination : str
+    code UIC de la gare de destination.
     Renvoie
-    Un dictionnaire qui à chaque sommet (str UIC) associe Parcours le moins cher.
+    Un parcours (cf classe parcours).
     """
-        parcours = []  # Contiendra le nom des sommets visités
+    parcours = []  # Contiendra le nom des sommets visités
  
     # Distance minimale trouvée pour chaque valeur dès le départ
     distances = {sommet: (None, inf) for sommet in self}
@@ -51,7 +53,7 @@ def dijkstra_source_vers_destination(self, origine, destination):
  
         # puis il devient notre nouvelle 'selection' 
     sommet = destination
-    parcours = [destination]
+    parcours += [destination]
     longueur = distances[destination][1]
     # On parcours le graphe à l'envers pour obtenir le chemin
     while sommet != origine:
