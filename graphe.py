@@ -20,3 +20,4 @@ class Graphe :
         #     self.edges[(s,e)][nom_tarif]=poid
 
 # hvdhdcn
+# nfdjddhcheuh
