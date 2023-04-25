@@ -1,4 +1,11 @@
 class Graphe :
+    """Définir la classe graphe
+    
+    Parameters
+    ----------
+    parameter1 : type
+        description
+    """
     def __init__(self):
         self.vertex={}
         self.edges={}
