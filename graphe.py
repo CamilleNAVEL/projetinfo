@@ -5,7 +5,8 @@ class Graphe :
     
     def add_vertex(self,s):
         if s not in self.vertex:
-            self.vertex[s]=set()       #le noeud est ajouté en temps que clée et la valeur associée sera un set des noeuds adjacents 
+            self.vertex[s]=set()       
+            #le noeud est ajouté en temps que clée et la valeur associée sera un set des noeuds adjacents 
     
     def add_edge(self,s,e,poid=1):
     # def add_edge(self,s,e,nom_tarif,poid=1):      si on met un dictionnaire pour séparer les tarifs
