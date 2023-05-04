@@ -37,7 +37,7 @@ def verif_connexe(G):
     Return
     ----------
     bool :
-        True si G est connexe
+        True si G est connexe, False sinon
     """                   
     L=list(G.vertex.keys())             #liste des noeuds du graphe
     l=L[0]                              #le premier noeud

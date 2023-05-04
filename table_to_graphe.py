@@ -3,7 +3,7 @@ import pandas as pd
 import graphe as grp
 
 def creation_graphe(dataframe):
-    """converti un dataframe départ/arrivée/prix en graphe
+    """Converti un dataframe départ/arrivée/prix en Graphe
     
     Parameters
     ----------
