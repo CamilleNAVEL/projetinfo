@@ -1,4 +1,5 @@
 import pandas as pd
+import os
 
 def creation_tableTER():
     """Création de la table des trajets TER.
@@ -11,7 +12,8 @@ def creation_tableTER():
         Gare destination - code UIC, Prix
     """
     # Il va falloir reflechir. Relier gare de Massy et autres d'idf
-    tableTER = pd.read_csv(os.path.join("data","tarifs-ter-par-od.csv"),sep=";")
+    tableTER = pd.read_csv(os.path.join("data","tarifs-ter-par-od.csv"),sep=";",
+                             dtype={'Origine - code UIC': str,'Destination - code UIC': str})
     tableTER.columns = [c.replace(' ','_') for c in tableTER.columns]
 
     tableTER=tableTER.rename(columns = {"Région" : "region",
@@ -28,4 +30,4 @@ def creation_tableTER():
     tableTER['type'] = 'TER'
 
     
-    return(tableTGV)
+    return(tableTER)
