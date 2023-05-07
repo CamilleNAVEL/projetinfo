@@ -70,4 +70,4 @@ class Graphe :
       
 
 
-#MODIFIER add edge pour n'avoir qu'une valeur si plusieurs tarif pour meme destination
+#MODIFIER add_edge pour n'avoir qu'une valeur si plusieurs tarif pour meme destination

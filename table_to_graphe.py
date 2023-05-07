@@ -45,4 +45,5 @@ def creation_graphe2(dataframe):
 # df2=pd.DataFrame(dict2)
 # G=creation_graphe(df2)
 # G.edges
+# G.vertex
 # G=creation_graphe2(df2)
