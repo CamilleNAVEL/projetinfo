@@ -10,7 +10,7 @@ def creation_graphe(dataframe):
     dataframe : dataframe
         un dataframe
 
-    Return
+    Returns
     ----------
     Graphe : 
         une instance de la classe Graphe  

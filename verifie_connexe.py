@@ -11,7 +11,7 @@ def rec_explorer(Graphe,node,visited=None):
     visited : list
         liste de code d'identification (liste(noeuds))
 
-    Return
+    Returns
     ----------
     list : 
         la liste des noeuds accessibles 
@@ -34,7 +34,7 @@ def verif_connexe(G):
     G : Graphe
         une instance de la classe Graphe
     
-    Return
+    Returns
     ----------
     bool :
         True si G est connexe, False sinon
