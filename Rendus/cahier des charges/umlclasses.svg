@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   contentStyleType="text/css"
+   height="370"
+   preserveAspectRatio="none"
+   version="1.1"
+   viewBox="0 0 1151 370"
+   width="1151"
+   zoomAndPan="magnify"
+   id="svg67"
+   sodipodi:docname="umlclasses.svg"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview69"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="false"
+     inkscape:zoom="1.1112076"
+     inkscape:cx="575.05004"
+     inkscape:cy="277.17592"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg67" />
+  <defs
+     id="defs2" />
+  <g
+     id="g65">
+    <!--cluster ParcoursTrain-->
+    <g
+       id="cluster_ParcoursTrain"
+       transform="matrix(1.0002497,0,0,0.65682723,-0.14358581,1.9169491)">
+      <path
+         d="m 8.5,6 h 116 a 3.75,3.75 0 0 1 2.5,2.5 l 7,19.7969 h 1007.5 a 2.5,2.5 0 0 1 2.5,2.5 V 545.5 a 2.5,2.5 0 0 1 -2.5,2.5 H 8.5 A 2.5,2.5 0 0 1 6,545.5 V 8.5 A 2.5,2.5 0 0 1 8.5,6"
+         fill="none"
+         style="stroke:#000000;stroke-width:1.5"
+         id="path4" />
+      <line
+         style="stroke:#000000;stroke-width:1.5"
+         x1="6"
+         x2="134"
+         y1="28.2969"
+         y2="28.2969"
+         id="line6" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="14px"
+         font-weight="bold"
+         lengthAdjust="spacing"
+         textLength="115"
+         x="10"
+         y="20.9951"
+         id="text8">ParcoursTrain</text>
+    </g>
+    <!--class TableTrajets-->
+    <g
+       id="elem_TableTrajets">
+      <rect
+         codeLine="6"
+         fill="#f1f1f1"
+         height="140.07809"
+         id="TableTrajets"
+         rx="2.5"
+         ry="2.5"
+         style="stroke:#181818;stroke-width:0.5"
+         width="1105"
+         x="22.5"
+         y="41" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="14px"
+         lengthAdjust="spacing"
+         textLength="90"
+         x="530"
+         y="58.995098"
+         id="text12">TableTrajets</text>
+      <line
+         style="stroke:#181818;stroke-width:0.5"
+         x1="23.5"
+         x2="1126.5"
+         y1="67.296898"
+         y2="67.296898"
+         id="line14" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="14px"
+         lengthAdjust="spacing"
+         textLength="127"
+         x="28.5"
+         y="84.292"
+         id="text16">table [dataframe]</text>
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="14px"
+         lengthAdjust="spacing"
+         textLength="68"
+         x="28.5"
+         y="100.5889"
+         id="text18">type [str]</text>
+      <line
+         style="stroke:#181818;stroke-width:0.5"
+         x1="23.5"
+         x2="1126.5"
+         y1="107.8906"
+         y2="107.8906"
+         id="line20" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="14px"
+         lengthAdjust="spacing"
+         textLength="82"
+         x="28.5"
+         y="124.8857"
+         id="text22">__init__(str)</text>
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="14px"
+         lengthAdjust="spacing"
+         textLength="1093"
+         x="28.5"
+         y="141.1826"
+         id="text24">filtre_tgv(self, transporteur : list(str), classe : list(str), profil_tarifaire : list(str), departements : list(str), regions : list(str), prix : {&quot;minimum&quot;,&quot;maximum})</text>
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="14px"
+         lengthAdjust="spacing"
+         textLength="250"
+         x="28.5"
+         y="157.47951"
+         id="text26">filtre_ter(self, filtres à déterminer)</text>
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="14px"
+         lengthAdjust="spacing"
+         textLength="169"
+         x="28.5"
+         y="173.7764"
+         id="text28">ajout_correspondance()</text>
+    </g>
+    <!--class Graphe-->
+    <g
+       id="elem_Graphe"
+       transform="translate(116)">
+      <rect
+         codeLine="15"
+         fill="#f1f1f1"
+         height="123.7813"
+         id="Graphe"
+         rx="2.5"
+         ry="2.5"
+         style="stroke:#181818;stroke-width:0.5"
+         width="496"
+         x="25"
+         y="225" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="14px"
+         lengthAdjust="spacing"
+         textLength="53"
+         x="548.5"
+         y="258.99509"
+         id="text32"
+         transform="translate(-302,-16)">Graphe</text>
+      <line
+         style="stroke:#181818;stroke-width:0.5"
+         x1="26"
+         x2="520"
+         y1="251.29691"
+         y2="251.29691"
+         id="line34" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="14px"
+         lengthAdjust="spacing"
+         textLength="154"
+         x="333"
+         y="284.29199"
+         id="text36"
+         transform="translate(-302,-16)">matrice_poids [Array]</text>
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="14px"
+         lengthAdjust="spacing"
+         textLength="128"
+         x="333"
+         y="300.5889"
+         id="text38"
+         transform="translate(-302,-16)">dictionnaire [dict]</text>
+      <line
+         style="stroke:#181818;stroke-width:0.5"
+         x1="26"
+         x2="520"
+         y1="291.89059"
+         y2="291.89059"
+         id="line40" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="14px"
+         lengthAdjust="spacing"
+         textLength="152"
+         x="333"
+         y="324.88571"
+         id="text42"
+         transform="translate(-302,-16)">__init__(TableTrajets)</text>
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="14px"
+         lengthAdjust="spacing"
+         textLength="484"
+         x="333"
+         y="341.18259"
+         id="text44"
+         transform="translate(-302,-16)">dijkstra_source_vers_destination(self, origine : str, destination : str)</text>
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="14px"
+         lengthAdjust="spacing"
+         textLength="310"
+         x="333"
+         y="357.47949"
+         id="text46"
+         transform="translate(-302,-16)">dijkstra_source_vers_tous(self, origine : str)</text>
+    </g>
+    <!--class Parcours-->
+    <g
+       id="elem_Parcours"
+       transform="translate(298,-198)">
+      <rect
+         codeLine="23"
+         fill="#f1f1f1"
+         height="107.4844"
+         id="Parcours"
+         rx="2.5"
+         ry="2.5"
+         style="stroke:#181818;stroke-width:0.5"
+         width="164"
+         x="493"
+         y="425" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="14px"
+         lengthAdjust="spacing"
+         textLength="61"
+         x="544.5"
+         y="442.99509"
+         id="text50">Parcours</text>
+      <line
+         style="stroke:#181818;stroke-width:0.5"
+         x1="494"
+         x2="656"
+         y1="451.29691"
+         y2="451.29691"
+         id="line52" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="14px"
+         lengthAdjust="spacing"
+         textLength="151"
+         x="499"
+         y="468.29199"
+         id="text54">parcours [dataframe]</text>
+      <line
+         style="stroke:#181818;stroke-width:0.5"
+         x1="494"
+         x2="656"
+         y1="475.59381"
+         y2="475.59381"
+         id="line56" />
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="14px"
+         lengthAdjust="spacing"
+         textLength="84"
+         x="499"
+         y="492.5889"
+         id="text58">__str__(self)</text>
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="14px"
+         lengthAdjust="spacing"
+         textLength="119"
+         x="499"
+         y="508.88571"
+         id="text60">trajet_total(self)</text>
+      <text
+         fill="#000000"
+         font-family="sans-serif"
+         font-size="14px"
+         lengthAdjust="spacing"
+         textLength="152"
+         x="499"
+         y="525.18262"
+         id="text62">export(self,filename)</text>
+    </g>
+    <!--link TableTrajets to Graphe-->
+    <!--link Graphe to Parcours-->
+    <!--SRC=[TL8nRYCn3Epr2iBDsO3pWIi2N7LjYdI68J0IrvQpAmaKDx1X-2zfxnt-s57oEl06Tvqub8OpG-s39t21NK_c1_JK2KW23hkzW0zCJaAAnfYCxXrt12_8BerSNXb3F1lNOodmYcyzAN8WAN0s0581s7WKx1W7sbRib1KgmhMmDiGWrYwrNcdTXLwOhEm-beNwRWt264jEB3Go_8G-56btrz16qXpBd9J12dBeK5NFkvuoAj50KUNDEamxjLU-auMZ8kV5e1g7SLYi5mCUw-doA9Luade32bm_mL__AAxlgBd2Gnh5kiJQpYbwZ8wMAtCnKsw_6VEUMc832WT7DgVW2sn-CUEf1kL3sq1ihZQrciNtcFogNJ-ygmkqHPUaT1_4nNeg4Y9MdaboqWMhI7Mfbsj0NnTkq7-f98tbNnmFfku_fDdAzsB-5wpLDtNxobHdINEWx8Bz5qZ7kl_RDCsOeZvkSsRVxMcp3zvJt3uzmnIecNATz-wwZBdy1G00]-->
+  </g>
+</svg>

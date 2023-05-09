@@ -1,0 +1,511 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[left=2.5cm,right=2.5cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\pagenumbering{gobble}
+\usepackage{float}
+\floatplacement{figure}{H}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{colortbl}
+\usepackage{pdflscape}
+\usepackage{tabu}
+\usepackage{threeparttable}
+\usepackage{threeparttablex}
+\usepackage[normalem]{ulem}
+\usepackage{makecell}
+\usepackage{xcolor}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{\LARGE\scshape École nationale de la statistique\\
+\strut \\
+\LARGE\scshape et de l'analyse de l'information \vspace{1cm}\\
+\includegraphics[width=0.4\textwidth]{ensai_logo}\\
+\vspace{1cm} \LARGE Projet de traitement de données (1AINF06)\\
+\vspace{1cm} \huge Cahier des charges \vspace{3cm}}
+\author{\vspace{1cm} \Large Encadrant : Mme Njongwa-Yepnga\\
+\vspace{1cm} \Large Groupe : Jérémie Charlotte, Rémi Malleville \& Camille Navel \vspace{2cm}}
+\date{10 avril 2023}
+
+\begin{document}
+\maketitle
+
+\newpage
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\newpage
+
+\pagenumbering{arabic}
+
+\hypertarget{pruxe9sentation-du-projet}{%
+\section{Présentation du projet}\label{pruxe9sentation-du-projet}}
+
+L'objectif est de créer un programme en python permettant à un voyageur de trouver le trajet ferroviaire le moins cher pour aller d'une gare de départ à une gare d'arrivée.
+L'utilisateur doit pouvoir sélectionner un certain nombre de critaires (type de train, classe, etc.). Il utilise des données publiques produites par la SNCF.
+
+Fonctionnalités de l'application
+
+L'application doit permettre à l'utilisateur de choisir un trajet selon ses critères. Il peut choisir :
+
+\begin{itemize}
+\tightlist
+\item
+  si le train est un OUIGO, OUIGO classique ou un TGV INOUI ;
+
+  \begin{itemize}
+  \tightlist
+  \item
+    de voyager en 1ere ou 2eme classe ;
+  \item
+    son profil tarifaire (normal ou réglementé) ;
+  \item
+    le prix qu'il est prêt à payer.
+  \end{itemize}
+\item
+  si le train est un TER :
+
+  \begin{itemize}
+  \tightlist
+  \item
+    si il possède un abonnement jeune ou tout public ;
+  \item
+    le prix qu'il est prêt à payer ;
+  \item
+    proposer à l'utilisateur les trajets possibles entre deux gares, en particulier le moins onéreux.
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{pruxe9sentation-des-donnuxe9es}{%
+\section{Présentation des données}\label{pruxe9sentation-des-donnuxe9es}}
+
+\hypertarget{table-tgv}{%
+\subsection{Table TGV}\label{table-tgv}}
+
+La table \emph{TGV} contient les trajets à grande vitesse disponibles. Il est à noter que certaines gares proposées sont dans des pays limitrophes de la France.
+
+\begin{table}[H]
+
+\caption{\label{tab:unnamed-chunk-1}Fichier détail de la table des trajets en TGV}
+\centering
+\begin{threeparttable}
+\begin{tabular}[t]{l|l|l}
+\hline
+Variable & Type & Description\\
+\hline
+Transporteur & str & Nom de la compagnie de transport\\
+\hline
+Gare origine & str & Nom de la gare d’origine\\
+\hline
+Gare origine - code UIC & str & Code international de la gare d’origine\\
+\hline
+Destination & str & Nom de la gare d’arrivée\\
+\hline
+Gare destination - code UIC & str & Code international de la gare d’arrivée\\
+\hline
+Classe & str & Entier valant 1 ou 2\\
+\hline
+Profil tarifaire & str & Chaîne de caractère valant Tarif Normal ou Tarif Réglementé\\
+\hline
+Prix minimum & float & Prix minimum observé\\
+\hline
+Prix maximum & float & Prix maximum observé\\
+\hline
+\end{tabular}
+\begin{tablenotes}[para]
+\item Nombres d'observations : 12 031
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\hypertarget{table-ter}{%
+\subsection{Table TER}\label{table-ter}}
+
+La table \emph{TER} contient les trajets en TER disponibles.
+
+\begin{table}[H]
+
+\caption{\label{tab:tableter}Fichier détail de la table des trajets en TER}
+\centering
+\begin{threeparttable}
+\begin{tabular}[t]{l|l|l}
+\hline
+Variable & Type & Description\\
+\hline
+Région & str & Nom de la région qui finance le TER\\
+\hline
+Origine & str & Nom de la gare d’origine\\
+\hline
+Origine - code UIC & str & Code international de la gare d’origine\\
+\hline
+Destination & str & Nom de la gare d’arrivée\\
+\hline
+Destination - code UIC & str & Code international de la gare d’arrivée\\
+\hline
+Libellé tarif & str & Description du tarif appliqué\\
+\hline
+Type tarif & str & Normal ou abonnement\\
+\hline
+Prix & float & Prix\\
+\hline
+\end{tabular}
+\begin{tablenotes}[para]
+\item Nombres d'observations : 92 042
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\hypertarget{table-voyageurs}{%
+\subsection{Table Voyageurs}\label{table-voyageurs}}
+
+La table \emph{Voyageurs} contient des informations sur les gares françaises (il n'y pas de gare etrangère). Elle permettra de faire des jointures lorsque nécessaire.
+
+\begin{table}[H]
+
+\caption{\label{tab:tablevoyageurs}Fichier détail de la table Voyageurs}
+\centering
+\begin{threeparttable}
+\begin{tabular}[t]{l|l|l}
+\hline
+Variable & Type & Description\\
+\hline
+Code UIC & str & Code UIC de la gare\\
+\hline
+Code Commune & str & Code Insee de la commune de la gare\\
+\hline
+Code département & str & Code du département de la gare\\
+\hline
+... & ... & Autres variables\\
+\hline
+\end{tabular}
+\begin{tablenotes}[para]
+\item Nombres d'observations : 3 220
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+\hypertarget{table-correspondances}{%
+\subsection{Table Correspondances}\label{table-correspondances}}
+
+La table \emph{Correspondances} (à créer) permettra de relier les gares d'une même aglomération (les gares parisiennes entre elles, celles de Montpellier, Lille, etc.).
+
+\begin{table}[H]
+
+\caption{\label{tab:tablecorrespondances}Fichier détail de la table Correspondances}
+\centering
+\begin{tabular}[t]{l|l|l}
+\hline
+Variable & Type & Description\\
+\hline
+Gare origine & str & Nom de la gare d’origine\\
+\hline
+Gare origine - code UIC & str & Code international de la gare d’origine\\
+\hline
+Destination & str & Nom de la gare d’arrivée\\
+\hline
+Gare destination - code UIC & str & Code international de la gare d’arrivée\\
+\hline
+Prix & float & Prix (à déterminer)\\
+\hline
+\end{tabular}
+\end{table}
+
+\hypertarget{pruxe9sentation-du-programme}{%
+\section{Présentation du programme}\label{pruxe9sentation-du-programme}}
+
+Le package python \emph{ParcoursTrain} comprendra trois classes et des fonctions.
+
+\hypertarget{diagramme-de-classes}{%
+\subsection{Diagramme de classes}\label{diagramme-de-classes}}
+
+\begin{figure}
+\centering
+\includegraphics{umlclasses.pdf}
+\caption{Classes du package ParcoursTrain}
+\end{figure}
+
+\hypertarget{classe-tabletrajets}{%
+\subsection{Classe TableTrajets}\label{classe-tabletrajets}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Class TableTrajets}
+  \CommentTok{"""Définit une table de trajets.}
+\CommentTok{    Attributs}
+\CommentTok{      table : dataframe}
+\CommentTok{        un dataframe avec les trajets.}
+\CommentTok{      type : str}
+\CommentTok{        Vaut "TGV" ou "TER"."""}
+
+  \KeywordTok{def}\NormalTok{ filtre\_tgv(}\VariableTok{self}\NormalTok{, transporteur}\OperatorTok{=}\NormalTok{[], classe}\OperatorTok{=}\NormalTok{[], profil\_tarifaire}\OperatorTok{=}\NormalTok{[], departements}\OperatorTok{=}\NormalTok{[], }
+\NormalTok{  regions}\OperatorTok{=}\NormalTok{[], prix}\OperatorTok{=}\StringTok{"minimum"}\NormalTok{):}
+    \CommentTok{"""Filtre la table TGV selon les critères choisis. La variable prix permet de choisir }
+\CommentTok{    entre la colonne prix minimal et prix maximal.}
+\CommentTok{        Arguments}
+\CommentTok{            transporteur : list[str]}
+\CommentTok{                liste des transporteurs retenus, si la liste est vide on ne filtre pas.}
+\CommentTok{            classe : list[str]}
+\CommentTok{              liste des classes retenues, si la liste est vide on ne filtre pas.}
+\CommentTok{            profil\_tarifaire : list[str]}
+\CommentTok{                liste des profils tarifaires retenus, si liste vide on ne filtre pas.}
+\CommentTok{            departements : list[str]}
+\CommentTok{                liste des départements retenus, si la liste est vide on ne filtre pas.}
+\CommentTok{            regions : list[str]}
+\CommentTok{                liste des régions retenues, si la liste est vide on ne filtre pas.}
+\CommentTok{            prix : str}
+\CommentTok{                Vaut "minimum" ou "maximum".}
+\CommentTok{      Renvoie}
+\CommentTok{          La TableTrajets filtrée. La colonne du prix (min ou max) est renommée prix."""}
+        
+  \KeywordTok{def}\NormalTok{ filtre\_ter():}
+      \CommentTok{"""À faire"""}
+
+  \KeywordTok{def}\NormalTok{ ajout\_correspondance(}\VariableTok{self}\NormalTok{):}
+      \CommentTok{"""Récupère la table des correspondances . La filtre  sur les UIC\_origine et }
+\CommentTok{      UIC\_destination qui apparaissent dans self. L\textquotesingle{}ajoute à self.}
+\CommentTok{          Renvoie}
+\CommentTok{            un TableTrajets avec les tajets et les correspondances additionnelles."""}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{classe-graphe}{%
+\subsection{Classe Graphe}\label{classe-graphe}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Class Graphe}
+    \CommentTok{"""Définit un graphe en utilisant une matrice de poids et un dictionnaire.}
+\CommentTok{    Attributs}
+\CommentTok{        matrice\_poids : array float numpy}
+\CommentTok{            matrice symétrique de nombres positifs à diagonale nulle.}
+\CommentTok{        Dictionnaire : dict}
+\CommentTok{            dictionnaire liant les numéros de ligne/colonne de matrice\_poids aux codes }
+\CommentTok{            UIC des gares correspondant"""}
+
+  \KeywordTok{def} \FunctionTok{\_\_init\_\_}\NormalTok{(TableTrajets):}
+    \CommentTok{"""Transforme la table des trajets en un graphe.}
+\CommentTok{      Arguments}
+\CommentTok{        Prend un dataframe en argument.}
+\CommentTok{      Renvoie}
+\CommentTok{          Un Graphe."""}
+
+  \KeywordTok{def}\NormalTok{ verifie\_connexe(}\VariableTok{self}\NormalTok{):}
+    \CommentTok{""" Prend un Graphe en argument et vérifie s\textquotesingle{}il est bien connexe}
+\CommentTok{    Arguments}
+\CommentTok{          graphe : un Graphe}
+\CommentTok{      Renvoie}
+\CommentTok{        un booléen : True si le graphe est connexe, False sinon."""}
+
+  \KeywordTok{def}\NormalTok{ verifie\_sommets\_lies(}\VariableTok{self}\NormalTok{, origine, destination):}
+    \CommentTok{"""Vérifie qu’origine et destination sont des sommets reliables du graphe.}
+\CommentTok{      Arguments}
+\CommentTok{          graphe : Graphe}
+\CommentTok{          origine : str}
+\CommentTok{              Code UIC de la gare d’origine.}
+\CommentTok{          Destination : str}
+\CommentTok{              code UIC de la gare de destination.}
+\CommentTok{        Renvoie}
+\CommentTok{          un booléen : True si on peut relier l’origine à la destination, False sinon."""}
+
+  \KeywordTok{def}\NormalTok{ dijkstra\_source\_vers\_destination(}\VariableTok{self}\NormalTok{, origine, destination):}
+      \CommentTok{"""Applique l’algo de Dijkstra pour relier à moindre coût origine à destination.}
+\CommentTok{    Arguments}
+\CommentTok{          graphe : Graphe}
+\CommentTok{              le graphe des trajets.}
+\CommentTok{          origine : str}
+\CommentTok{              Code UIC de la gare d’origine.}
+\CommentTok{          Destination : str}
+\CommentTok{              code UIC de la gare de destination.}
+\CommentTok{      Renvoie}
+\CommentTok{          Un parcours (cf classe parcours)."""}      
+
+  \KeywordTok{def}\NormalTok{ dijkstra\_source\_vers\_tous(}\VariableTok{self}\NormalTok{, origine):}
+      \CommentTok{"""Applique l’algo de Dijkstra de l’origine aux sommets   du graphe.}
+\CommentTok{    Arguments}
+\CommentTok{          graphe : graphe}
+\CommentTok{            le graphe des trajets.}
+\CommentTok{        origine : str}
+\CommentTok{            Code UIC de la gare d’origine.}
+\CommentTok{    Renvoie}
+\CommentTok{        Un dictionnaire qui à chaque sommet (str UIC) associe Parcours le moins cher."""}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{classe-parcours}{%
+\subsection{Classe Parcours}\label{classe-parcours}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Class Parcours}
+    \CommentTok{"""Donne un parcours sous forme de dataframe. Une colonne UIC\_origine, une colonne}
+\CommentTok{    UIC\_destination et une colonne prix. L’UIC\_destination est égal à l’UIC\_origine de}
+\CommentTok{    la ligne    précédente."""}
+  \KeywordTok{def}\NormalTok{ trajet\_total(}\VariableTok{self}\NormalTok{):}
+    \CommentTok{"""Renvoie une seule ligne avec le premier UIC\_origine, le dernier UIC\_destination}
+\CommentTok{            et le prix total (la somme des prix des trajets)"""}
+    
+  \KeywordTok{def} \FunctionTok{\_\_str\_\_}\NormalTok{(}\VariableTok{self}\NormalTok{):}
+        \CommentTok{"""Transforme le parcours en texte, ajoute une ligne d’ensemble au final (coût}
+\CommentTok{        total)."""}
+        
+  \KeywordTok{def}\NormalTok{ export(}\VariableTok{self}\NormalTok{, filename):}
+        \CommentTok{"""Exporte le parcours dans un fichier csv ou txt (à déterminer).}
+\CommentTok{        Arguments}
+\CommentTok{        filename : str}
+\CommentTok{          le nom du fichier de l’export (avec le chemin).}
+\CommentTok{        Renvoie}
+\CommentTok{          rien (mais écrit le fichier)"""}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{fonctions-hors-classes}{%
+\subsection{Fonctions hors classes}\label{fonctions-hors-classes}}
+
+La fonction \emph{\_\_init\_\_()} du package chargera les quatre tables \emph{tableTgv}, \emph{tableTer}, \emph{tableVoyageurs} et \emph{tableCorrespondances}.
+La fonction \emph{creation\_tableCorrespondances()} créra la table des correspondances.
+Une fonction permettra de lancer l'ensemble de l'algorithme avec les filtres désirés.
+
+\hypertarget{duxe9roulement-du-projet}{%
+\section{Déroulement du projet}\label{duxe9roulement-du-projet}}
+
+\hypertarget{attendus-et-livrables}{%
+\subsection{Attendus et livrables}\label{attendus-et-livrables}}
+
+\begin{itemize}
+\item
+  Cahier des charges : pour le lundi 10 avril 2023 à 23h59. \(\le\) 5 pages.
+\item
+  Note de suivi personnel : pour le 22 mai 2023 à 23h59. Travail individuel. \(\le\) 2 pages.
+\item
+  Code : pour le 24 mai 2023 à 23h59.
+\item
+  Rapport : pour le 24 mai 2023 à 23h59. \(\le\) 25 pages.
+\item
+  Soutenance : du 31 mai au 2 juin 2023.
+\end{itemize}
+
+\hypertarget{planification}{%
+\subsection{Planification}\label{planification}}
+
+\begin{figure}
+\centering
+\includegraphics{gantt.pdf}
+\caption{Diagramme de Gantt du projet}
+\end{figure}
+
+\end{document}
