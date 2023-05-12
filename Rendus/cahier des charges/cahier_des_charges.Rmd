@@ -1,0 +1,308 @@
+---
+title: | 
+  | \LARGE\scshape École nationale de la statistique
+  |
+  | \LARGE\scshape et de l'analyse de l'information \vspace{1cm}
+  | \includegraphics[width=0.4\textwidth]{ensai_logo}
+  | \vspace{1cm} \LARGE Projet de traitement de données (1AINF06)
+  | \vspace{1cm} \huge Cahier des charges \vspace{3cm}
+author: | 
+  | \vspace{1cm} \Large Encadrant : Mme Njongwa-Yepnga
+  | \vspace{1cm} \Large Groupe : Jérémie Charlotte, Rémi Malleville & Camille Navel \vspace{2cm}
+geometry: "left=2.5cm,right=2.5cm,top=2cm,bottom=2cm"
+date: "10 avril 2023"
+
+header-includes:
+   - \usepackage[utf8]{inputenc}
+   - \usepackage[french]{babel}
+   - \pagenumbering{gobble}
+   - \usepackage{float}
+   - \floatplacement{figure}{H}
+include-before:
+   - '\newpage'
+output: 
+  bookdown::pdf_document2:
+    extra_dependencies: ["float"]
+    keep_tex: yes
+    
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse);library(knitr);library(kableExtra)
+```
+
+\newpage
+
+\pagenumbering{arabic}
+
+# Présentation du projet
+
+L'objectif est de créer un programme en python permettant à un voyageur de trouver le trajet ferroviaire le moins cher pour aller d'une gare de départ à une gare d'arrivée.
+L'utilisateur doit pouvoir sélectionner un certain nombre de critaires (type de train, classe, etc.). Il utilise des données publiques produites par la SNCF. 
+
+Fonctionnalités de l’application  
+
+L'application doit permettre à l’utilisateur de choisir un trajet selon ses critères. Il peut choisir :
+
+* si le train est un OUIGO, OUIGO classique ou un TGV INOUI ;
+  - de voyager en 1ere ou 2eme classe ;
+  - son profil tarifaire (normal ou réglementé) ;
+  - le prix qu’il est prêt à payer.
+* si le train est un TER :
+  - si il possède un abonnement jeune ou tout public ;
+  - le prix qu’il est prêt à payer ;
+  - proposer à l’utilisateur les trajets possibles entre deux gares, en particulier le moins onéreux.
+
+# Présentation des données
+
+
+
+## Table TGV
+
+La table *TGV* contient les trajets à grande vitesse disponibles. Il est à noter que certaines gares proposées sont dans des pays limitrophes de la France.
+
+```{r }
+tgv=data.frame("Variable"=c("Transporteur","Gare origine","Gare origine - code UIC","Destination","Gare destination - code UIC","Classe","Profil tarifaire",
+                            "Prix minimum","Prix maximum"),
+               "Type"=c(rep("str",7),rep("float",2)),
+               "Description"=c("Nom de la compagnie de transport","Nom de la gare d’origine","Code international de la gare d’origine","Nom de la gare d’arrivée",
+                               "Code international de la gare d’arrivée","Entier valant 1 ou 2","Chaîne de caractère valant Tarif Normal ou Tarif Réglementé",
+                               "Prix minimum observé","Prix maximum observé")
+               )
+
+tgv  %>% 
+  kable(format="latex",
+        caption="Fichier détail de la table des trajets en TGV")  %>% 
+  footnote(general = "Nombres d'observations : 12 031",
+           general_title = "", 
+           footnote_as_chunk = TRUE,
+           threeparttable = TRUE) %>%  
+  kable_styling(latex_options = "HOLD_position")
+```
+
+
+## Table TER
+
+La table *TER* contient les trajets en TER disponibles.
+
+```{r tableter}
+ter=data.frame("Variable"=c("Région","Origine","Origine - code UIC","Destination","Destination - code UIC","Libellé tarif","Type tarif","Prix"),
+               "Type"=c(rep("str",7),rep("float",1)),
+               "Description"=c("Nom de la région qui finance le TER","Nom de la gare d’origine","Code international de la gare d’origine",
+                               "Nom de la gare d’arrivée","Code international de la gare d’arrivée","Description du tarif appliqué",
+                               "Normal ou abonnement","Prix"))
+
+ter %>% 
+  kable(format="latex",
+        caption="Fichier détail de la table des trajets en TER")  %>% 
+  footnote(general = "Nombres d'observations : 92 042",
+           general_title = "", 
+           footnote_as_chunk = TRUE,
+           threeparttable = TRUE)%>%  
+  kable_styling(latex_options = "HOLD_position")
+```
+
+## Table Voyageurs
+
+La table *Voyageurs* contient des informations sur les gares françaises (il n'y pas de gare etrangère). Elle permettra de faire des jointures lorsque nécessaire.
+
+```{r tablevoyageurs}
+voyageurs=data.frame("Variable"=c("Code UIC","Code Commune","Code département","..."),
+               "Type"=c(rep("str",3),rep("...",1)),
+               "Description"=c("Code UIC de la gare","Code Insee de la commune de la gare","Code du département de la gare","Autres variables"))
+
+voyageurs %>% 
+  kable(format="latex",
+        caption="Fichier détail de la table Voyageurs")  %>% 
+  footnote(general = "Nombres d'observations : 3 220",
+           general_title = "", 
+           footnote_as_chunk = TRUE,
+           threeparttable = TRUE)%>%  
+  kable_styling(latex_options = "HOLD_position")
+```
+
+## Table Correspondances
+
+La table *Correspondances* (à créer) permettra de relier les gares d'une même aglomération (les gares parisiennes entre elles, celles de Montpellier, Lille, etc.).
+
+```{r tablecorrespondances}
+correspondances=data.frame("Variable"=c("Gare origine","Gare origine - code UIC","Destination","Gare destination - code UIC","Prix"),
+               "Type"=c(rep("str",4),rep("float",1)),
+               "Description"=c("Nom de la gare d’origine","Code international de la gare d’origine","Nom de la gare d’arrivée",
+                               "Code international de la gare d’arrivée","Prix (à déterminer)"))
+
+correspondances %>% 
+  kable(format="latex",
+        caption="Fichier détail de la table Correspondances") %>%  
+  kable_styling(latex_options = "HOLD_position")
+```
+
+# Présentation du programme
+
+Le package python *ParcoursTrain* comprendra trois classes et des fonctions.
+
+## Diagramme de classes
+
+![Classes du package ParcoursTrain](umlclasses.pdf)
+
+## Classe TableTrajets
+
+```{python, eval=FALSE, echo=TRUE}
+Class TableTrajets
+  """Définit une table de trajets.
+    Attributs
+      table : dataframe
+        un dataframe avec les trajets.
+      type : str
+        Vaut "TGV" ou "TER"."""
+
+  def filtre_tgv(self, transporteur=[], classe=[], profil_tarifaire=[], departements=[], 
+  regions=[], prix="minimum"):
+    """Filtre la table TGV selon les critères choisis. La variable prix permet de choisir 
+    entre la colonne prix minimal et prix maximal.
+    	Arguments
+		    transporteur : list[str]
+			    liste des transporteurs retenus, si la liste est vide on ne filtre pas.
+		    classe : list[str]
+    		  liste des classes retenues, si la liste est vide on ne filtre pas.
+		    profil_tarifaire : list[str]
+			    liste des profils tarifaires retenus, si liste vide on ne filtre pas.
+	    	departements : list[str]
+			    liste des départements retenus, si la liste est vide on ne filtre pas.
+		    regions : list[str]
+			    liste des régions retenues, si la liste est vide on ne filtre pas.
+		    prix : str
+			    Vaut "minimum" ou "maximum".
+  	  Renvoie
+	  	  La TableTrajets filtrée. La colonne du prix (min ou max) est renommée prix."""
+		
+  def filtre_ter():
+	  """À faire"""
+
+  def ajout_correspondance(self):
+	  """Récupère la table des correspondances . La filtre 	sur les UIC_origine et 
+	  UIC_destination qui apparaissent dans self. L'ajoute à self.
+		  Renvoie
+		    un TableTrajets avec les tajets et les correspondances additionnelles."""
+```
+
+## Classe Graphe
+
+```{python , eval=FALSE, echo=TRUE}
+Class Graphe
+	"""Définit un graphe en utilisant une matrice de poids et un dictionnaire.
+	Attributs
+		matrice_poids : array float numpy
+			matrice symétrique de nombres positifs à diagonale nulle.
+		Dictionnaire : dict
+			dictionnaire liant les numéros de ligne/colonne de matrice_poids aux codes 
+			UIC des gares correspondant"""
+
+  def __init__(TableTrajets):
+    """Transforme la table des trajets en un graphe.
+	  Arguments
+	  	Prend un dataframe en argument.
+	  Renvoie
+		  Un Graphe."""
+
+  def verifie_connexe(self):
+    """	Prend un Graphe en argument et vérifie s'il est bien connexe
+  	Arguments
+		  graphe : un Graphe
+	  Renvoie
+	  	un booléen : True si le graphe est connexe, False sinon."""
+
+  def verifie_sommets_lies(self, origine, destination):
+    """Vérifie qu’origine et destination sont des sommets reliables du graphe.
+	  Arguments
+		  graphe : Graphe
+		  origine : str
+			  Code UIC de la gare d’origine.
+		  Destination : str
+			  code UIC de la gare de destination.
+		Renvoie
+		  un booléen : True si on peut relier l’origine à la destination, False sinon."""
+
+  def dijkstra_source_vers_destination(self, origine, destination):
+	  """Applique l’algo de Dijkstra pour relier à moindre coût origine à destination.
+  	Arguments
+		  graphe : Graphe
+			  le graphe des trajets.
+		  origine : str
+			  Code UIC de la gare d’origine.
+		  Destination : str
+			  code UIC de la gare de destination.
+	  Renvoie
+		  Un parcours (cf classe parcours)."""		
+
+  def dijkstra_source_vers_tous(self, origine):
+	  """Applique l’algo de Dijkstra de l’origine aux sommets	du graphe.
+  	Arguments
+		  graphe : graphe
+		  	le graphe des trajets.
+	  	origine : str
+		  	Code UIC de la gare d’origine.
+  	Renvoie
+	  	Un dictionnaire qui à chaque sommet (str UIC) associe Parcours le moins cher."""
+```
+
+## Classe Parcours
+
+```{python , eval=FALSE, echo=TRUE}
+
+Class Parcours
+	"""Donne un parcours sous forme de dataframe. Une colonne UIC_origine, une colonne
+	UIC_destination et une colonne prix. L’UIC_destination est égal à l’UIC_origine de
+	la ligne 	précédente."""
+  def trajet_total(self):
+    """Renvoie une seule ligne avec le premier UIC_origine, le dernier UIC_destination
+			et le prix total (la somme des prix des trajets)"""
+    
+  def __str__(self):
+		"""Transforme le parcours en texte, ajoute une ligne d’ensemble au final (coût
+		total)."""
+		
+  def export(self, filename):
+		"""Exporte le parcours dans un fichier csv ou txt (à déterminer).
+		Arguments
+		filename : str
+		  le nom du fichier de l’export (avec le chemin).
+		Renvoie
+		  rien (mais écrit le fichier)"""
+```
+
+
+## Fonctions hors classes
+
+La fonction *\_\_init\_\_()* du package chargera les quatre tables *tableTgv*, *tableTer*, *tableVoyageurs* et *tableCorrespondances*.
+La fonction *creation_tableCorrespondances()* créra la table des correspondances.
+Une fonction permettra de lancer l'ensemble de l'algorithme avec les filtres désirés.
+
+
+# Déroulement du projet
+
+<!-- ## Contraintes -->
+
+<!-- Les packages autorisés sont numpy, matplotlib, scipy et pandas. Pour les tests on peut utiliser pytest. -->
+
+## Attendus et livrables
+
+- Cahier des charges : pour le lundi 10 avril 2023 à 23h59. $\le$ 5 pages.
+<!-- PTD_nomEncadrant_Gr_Nom1_Nom2_Nom3.pdf PTD_NJONGWAYEPNGA_Gr_Charlotte_Malleville_Navel.pdf -->
+- Note de suivi personnel : pour le 22 mai 2023 à 23h59. Travail individuel. $\le$ 2 pages.
+
+- Code : pour le 24 mai 2023 à 23h59.
+
+- Rapport : pour le 24 mai 2023 à 23h59. $\le$ 25 pages.
+
+- Soutenance : du 31 mai au 2 juin 2023.
+
+
+## Planification
+
+![Diagramme de Gantt du projet](gantt.pdf)
+
+
+
+
