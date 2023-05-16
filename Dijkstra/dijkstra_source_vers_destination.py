@@ -1,64 +1,32 @@
-from math import inf
+import heapq
 def dijkstra_source_vers_destination(self, origine, destination):
+    """Dans cette implémentation, la classe Graphe représente le graphe sous forme d'un dictionnaire adj, 
+    où chaque clé est un sommet et chaque valeur est un dictionnaire des sommets adjacents et des poids des arêtes correspondantes. 
+    La méthode ajouter_arete permet d'ajouter des arêtes au graphe.
+    La méthode dijkstra_source_vers_destination utilise l'algorithme de Dijkstra pour calculer la distance la plus courte entre origine et destination. 
+    Elle retourne la distance la plus courte entre ces deux sommets. Si destination n'est pas atteignable depuis origine, la fonction retourne float('inf').
     """
-    Applique l’algo de Dijkstra pour relier à moindre coût origine à destination.
-    Arguments
-    graphe : Graphe
-    le graphe des trajets.
-    origine : str
-    Code UIC de la gare d’origine.
-    Destination : str
-    code UIC de la gare de destination.
-    Renvoie
-    Un parcours (cf classe parcours).
-    """
-    parcours = []  # Contiendra le nom des sommets visités
- 
-    # Distance minimale trouvée pour chaque valeur dès le départ
-    distances = {sommet: (None, inf) for sommet in self}
-    #     Sommet d'origine (None par défaut), distance
- 
-    distances[origine] = 0  # On initialise la distance du départ
- 
-    # Nombre de sommets du graphe, longueur du dictionnaire
-    taille_graph = len(self)
- 
-    selection = origine
-    coefficient = 0
- 
-    while len(parcours) < taille_graph:
-        # On marque la 'selection'
-        parcours.append(selection)
-        # On parcours les voisins de 'selection'
-        for voisin in self.origine[selection]:
-            # voisin est le tuple (origine, code_origine, destination , code_destination , prix)
-            sommet = voisin.origine  # Le sommet qu'on, parcours
-            poids = voisin.prix  # Le poids de selection au sommet
-            # voir ici comment on accède aux données du graphe
-            if sommet not in parcours:
-                # Pour chaque voisin non marqué,
-                # on compare coefficient + arête
-                # avec la distance du dictionnaire
-                d = distances[sommet][1]
-                if coefficient + poids < d:
-                    # Si c'est plus petit, on remplace
-                    distances[sommet] = (selection, coefficient + poids)
-        # On recherche le minimum parmi les non marqués
-        selection = None
-        minimum = inf
-        for sommet in self:
-            if sommet not in parcours and distances[sommet][1] < minimum[1]:
-                selection = sommet
-                minimum = distances[sommet][1]
- 
-        # puis il devient notre nouvelle 'selection' 
-    sommet = destination
-    parcours += [destination]
-    longueur = distances[destination][1]
-    # On parcours le graphe à l'envers pour obtenir le chemin
-    while sommet != origine:
-        sommet = distances[sommet][0]
-        parcours.append(sommet)
-    parcours.reverse()
-    # On renvoie le chemin le plus court
-    return parcours
+    # Initialisation des distances à l'infini, sauf pour le sommet de départ
+    d = {s: float('inf') for s in self.adj}
+    d[origine] = 0
+        
+    # Initialisation de la file de priorité avec le sommet de départ
+    pq = [(0, origine)]
+        
+    while pq:
+        # Extraction du sommet avec la plus petite distance estimée
+        dist, u = heapq.heappop(pq)
+            
+        # Si on atteint la destination, on peut s'arrêter
+        if u == destination:
+         break
+            
+        # Mise à jour des distances pour tous les sommets accessibles depuis u
+        for v, w_uv in self.adj[u].items():
+            alt = dist + w_uv
+            if alt < d[v]:
+                d[v] = alt
+                heapq.heappush(pq, (alt, v))
+        
+    return d[destination]
+
