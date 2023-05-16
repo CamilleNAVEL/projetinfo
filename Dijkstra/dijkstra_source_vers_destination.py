@@ -1,32 +1,52 @@
-import heapq
-def dijkstra_source_vers_destination(self, origine, destination):
-    """Dans cette implémentation, la classe Graphe représente le graphe sous forme d'un dictionnaire adj, 
-    où chaque clé est un sommet et chaque valeur est un dictionnaire des sommets adjacents et des poids des arêtes correspondantes. 
-    La méthode ajouter_arete permet d'ajouter des arêtes au graphe.
-    La méthode dijkstra_source_vers_destination utilise l'algorithme de Dijkstra pour calculer la distance la plus courte entre origine et destination. 
-    Elle retourne la distance la plus courte entre ces deux sommets. Si destination n'est pas atteignable depuis origine, la fonction retourne float('inf').
-    """
-    # Initialisation des distances à l'infini, sauf pour le sommet de départ
-    d = {s: float('inf') for s in self.adj}
-    d[origine] = 0
-        
-    # Initialisation de la file de priorité avec le sommet de départ
-    pq = [(0, origine)]
-        
-    while pq:
-        # Extraction du sommet avec la plus petite distance estimée
-        dist, u = heapq.heappop(pq)
-            
-        # Si on atteint la destination, on peut s'arrêter
-        if u == destination:
-         break
-            
-        # Mise à jour des distances pour tous les sommets accessibles depuis u
-        for v, w_uv in self.adj[u].items():
-            alt = dist + w_uv
-            if alt < d[v]:
-                d[v] = alt
-                heapq.heappush(pq, (alt, v))
-        
-    return d[destination]
+import pandas as pd
+import numpy as np
+
+def dijkstra_source_vers_destination(graphe, origine, destination):
+    # Initialisation
+    noeuds = np.unique(graphe[['origine', 'destination']])
+    distances = {noeud: np.inf for noeud in noeuds}
+    distances[origine] = 0
+    predecesseurs = {noeud: '' for noeud in noeuds}
+    visite = set()
+
+    # Algorithme de Dijkstra
+    while visite != set(noeuds):
+        # Sélectionner le nœud avec la distance minimale non visitée
+        noeud_courant = min(
+            set(distances.keys()) - visite, key=lambda x: distances[x]
+        )
+        visite.add(noeud_courant)
+
+        # Mettre à jour les distances des nœuds voisins
+        voisins = graphe[
+            (graphe['origine'] == noeud_courant) | (graphe['destination'] == noeud_courant)
+        ]
+        for _, voisin in voisins.iterrows():
+            if voisin['origine'] == noeud_courant:
+                noeud_voisin = voisin['destination']
+                predecesseurs[noeud_voisin] = noeud_courant
+            else:
+                noeud_voisin = voisin['origine']
+
+            if noeud_voisin not in visite:
+                nouveau_prix = distances[noeud_courant] + voisin['prix']
+                if nouveau_prix < distances[noeud_voisin]:
+                    distances[noeud_voisin] = nouveau_prix
+                    predecesseurs[noeud_voisin] = noeud_courant
+
+    # Récupérer le chemin optimal de destination vers l'origine
+    chemin_optimal = []
+    noeud_actuel = destination
+    while noeud_actuel != origine:
+        chemin_optimal.insert(0, noeud_actuel)
+        noeud_actuel = predecesseurs[noeud_actuel]
+    chemin_optimal.insert(0, origine)
+
+    # Résultats
+    print("Distances minimales :")
+    for noeud, distance in distances.items():
+        print(f"{noeud}: {distance}")
+    
+    print("\nChemin optimal :")
+    print(" -> ".join(chemin_optimal))
 
