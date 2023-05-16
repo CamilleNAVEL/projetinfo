@@ -1,8 +1,8 @@
 import pandas as pd
-from creation_tableTGV import creation_tableTGV
-from creation_tableTER import creation_tableTER
-from creation_tableCorrespondances import creation_tableCorrespondances
-
+from preparationdata.creation_tableTGV import creation_tableTGV
+from preparationdata.creation_tableTER import creation_tableTER
+from preparationdata.creation_tableCorrespondances import creation_tableCorrespondances
+from preparationdata.creation_tableDep import creation_tableDep
 
 def creation_tableTrajets():
     """Création de la table des trajets.
@@ -20,5 +20,21 @@ def creation_tableTrajets():
     tableCorrespondances = creation_tableCorrespondances()
     tableTrajets=pd.concat([tableTGV,tableTER,tableCorrespondances])
     
+    # rajout des départements et régions
+    gares=creation_tableDep()
+    gares_origine=gares.rename(columns = {"code_UIC" : "code_origine",
+                                          "dep" : "dep_origine",
+                                          "reg" : "reg_origine"})
+    gares_destination=gares.rename(columns = {"code_UIC" : "code_destination",
+                                          "dep" : "dep_destination",
+                                          "reg" : "reg_destination"})
+    
+    tableTrajets = tableTrajets.merge(gares_origine,on="code_origine",
+                                      suffixes=(True,False))
+    
+    tableTrajets = tableTrajets.merge(gares_destination,on="code_destination",
+                                      suffixes=(True,False))
+
+        
     return(tableTrajets)
 

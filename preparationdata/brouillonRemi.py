@@ -2,8 +2,8 @@ import __init__
 import pandas as pd
 import numpy as np
 import preparationdata.tableTrajets as tableTrajets
-from creation_tableTrajets import creation_tableTrajets
-from creation_tableTGV import creation_tableTGV
+from preparationdata.creation_tableTrajets import creation_tableTrajets
+from preparationdata.creation_tableTGV import creation_tableTGV
 
 trajets = TableTrajets('TGV')
 
@@ -63,9 +63,9 @@ garesParis=garesParis[garesParis.code_origine != garesParis.code_destination]
 
 import os
 
-from creation_tableTGV import creation_tableTGV
+from preparationdata.creation_tableTGV import creation_tableTGV
 
-tableVoyageurs = pd.read_csv(os.path.join("data","referentiel-gares-voyageurs.csv"),sep=";",
+tableVoyageurs = pd.read_csv(os.path.join("preparationdata/data","referentiel-gares-voyageurs.csv"),sep=";",
                              dtype={'Code UIC': str,'Code Commune': str,'Code département': str})
 tableVoyageurs.columns = [c.replace(' ','_') for c in tableVoyageurs.columns]
 # del gares
@@ -73,7 +73,15 @@ tableVoyageurs.columns = [c.replace(' ','_') for c in tableVoyageurs.columns]
 garesTGV=creation_tableTGV()[["origine","code_origine"]]
 garesTGV.drop_duplicates(keep = 'first', inplace=True)
 gares=tableVoyageurs[["Code_UIC","Code_département","Code_Commune"]]
+
+gares=gares.assign(Code_UIC = lambda df: df['Code_UIC'].str[2:])
+# df.assign(
+#     is_senior = lambda dataframe: dataframe['age'].map(lambda age: True if age >= 65 else False) 
+# )
+
 gares['Code_UIC']=gares['Code_UIC'].str[2:]
+# gares.Code_UIC=gares['Code_UIC'].str[2:]
+gares.Code_UIC=gares.Code_UIC.str[2:]
 
 gares=gares.merge(garesTGV,left_on="Code_UIC",right_on="code_origine",suffixes=(True,True))
  

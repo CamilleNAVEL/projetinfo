@@ -36,11 +36,11 @@ def filtre_tgv(table, transporteur=[], classe=[], profil_tarifaire=[], departeme
     if profil_tarifaire !=[]:
         df = df[df.Profil_tarifaire.isin(profil_tarifaire)]
     if departements !=[]:
-        # A faire
-        pass
+        df = df[df.dep_origine.isin(departements)]
+        df = df[df.dep_destination.isin(departements)]        
     if regions !=[]:
-        # A faire
-        pass
+        df = df[df.reg_origine.isin(regions)]
+        df = df[df.reg_destination.isin(regions)]      
     
     if prix == 'minimum':
         df['prix']=df.Prix_minimum
