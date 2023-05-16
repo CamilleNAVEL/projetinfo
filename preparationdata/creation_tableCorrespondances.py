@@ -1,7 +1,7 @@
 import pandas as pd
 import os
 
-from creation_tableTGV import creation_tableTGV
+from preparationdata.creation_tableTGV import creation_tableTGV
 
 def creation_tableCorrespondances():
     """Création de la table des correspondnaces.
@@ -13,7 +13,7 @@ def creation_tableCorrespondances():
         Avec les colonnes Gare Origine, Gare origine - code UIC, Destination,
         Gare destination - code UIC, Prix
     """
-    tableVoyageurs = pd.read_csv(os.path.join("data","referentiel-gares-voyageurs.csv"),sep=";",
+    tableVoyageurs = pd.read_csv(os.path.join("preparationdata/data","referentiel-gares-voyageurs.csv"),sep=";",
                              dtype={'Code UIC': str,'Code Commune': str,'Code département': str})
     tableVoyageurs.columns = [c.replace(' ','_') for c in tableVoyageurs.columns]
     # del gares
@@ -21,7 +21,9 @@ def creation_tableCorrespondances():
     garesTGV=creation_tableTGV()[["origine","code_origine"]]
     garesTGV.drop_duplicates(keep = 'first', inplace=True)
     gares=tableVoyageurs[["Code_UIC","Code_département","Code_Commune"]]
-    gares['Code_UIC']=gares['Code_UIC'].str[2:]
+    
+    gares=gares.assign(Code_UIC = lambda df: df['Code_UIC'].str[2:])
+    # gares['Code_UIC']=gares['Code_UIC'].str[2:]
 
     gares=gares.merge(garesTGV,left_on="Code_UIC",right_on="code_origine",suffixes=(True,True))
     
