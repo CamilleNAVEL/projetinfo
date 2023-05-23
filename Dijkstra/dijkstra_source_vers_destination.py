@@ -5,11 +5,8 @@ import numpy as np
 def dijkstra_source_vers_destination(graphe, origine, destination):
     # Initialisation
     noeuds = np.unique(list(np.concatenate([graphe['origine'], graphe['destination']]).flat))
-    print(noeuds)
     distances = {noeud: np.inf for noeud in noeuds}
-    print(distances)
     distances[origine] = 0
-    print(distances)
     predecesseurs = {noeud: origine for noeud in noeuds}
     visite = set()
 
@@ -36,7 +33,6 @@ def dijkstra_source_vers_destination(graphe, origine, destination):
                 if nouveau_prix < distances[noeud_voisin]:
                     predecesseurs[noeud_voisin] = noeud_courant  # Mettre à jour le prédécesseur
                     distances[noeud_voisin] = nouveau_prix  # Mettre à jour la distance
-        print(distances)      
 
     # Récupérer le chemin optimal de destination vers l'origine
     chemin_optimal = []
