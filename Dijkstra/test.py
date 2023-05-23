@@ -1,4 +1,5 @@
 from dijkstra_source_vers_destination import dijkstra_source_vers_destination
+from dijkstra_source_vers_tous import dijkstra_source_vers_tous
 import pandas as pd
 
 graphe = pd.DataFrame({
@@ -10,3 +11,4 @@ graphe = pd.DataFrame({
 })
 
 dijkstra_source_vers_destination(graphe, "PARIS", "MARSEILLE")
+dijkstra_source_vers_tous(graphe,"PARIS")
