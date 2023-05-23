@@ -1,12 +1,16 @@
 import pandas as pd
 import numpy as np
 
+
 def dijkstra_source_vers_destination(graphe, origine, destination):
     # Initialisation
-    noeuds = np.unique(graphe[['origine', 'destination']])
+    noeuds = np.unique(list(np.concatenate([graphe['origine'], graphe['destination']]).flat))
+    print(noeuds)
     distances = {noeud: np.inf for noeud in noeuds}
+    print(distances)
     distances[origine] = 0
-    predecesseurs = {noeud: '' for noeud in noeuds}
+    print(distances)
+    predecesseurs = {noeud: origine for noeud in noeuds}
     visite = set()
 
     # Algorithme de Dijkstra
@@ -24,15 +28,15 @@ def dijkstra_source_vers_destination(graphe, origine, destination):
         for _, voisin in voisins.iterrows():
             if voisin['origine'] == noeud_courant:
                 noeud_voisin = voisin['destination']
-                predecesseurs[noeud_voisin] = noeud_courant
             else:
                 noeud_voisin = voisin['origine']
 
             if noeud_voisin not in visite:
                 nouveau_prix = distances[noeud_courant] + voisin['prix']
                 if nouveau_prix < distances[noeud_voisin]:
-                    distances[noeud_voisin] = nouveau_prix
-                    predecesseurs[noeud_voisin] = noeud_courant
+                    predecesseurs[noeud_voisin] = noeud_courant  # Mettre à jour le prédécesseur
+                    distances[noeud_voisin] = nouveau_prix  # Mettre à jour la distance
+        print(distances)      
 
     # Récupérer le chemin optimal de destination vers l'origine
     chemin_optimal = []
