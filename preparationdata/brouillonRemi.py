@@ -120,3 +120,7 @@ creation_tableCorrespondances()
 creation_tableTrajets()
 
 tableTrajets()
+
+tableVoyageurs.Gare_étrangère
+
+tableTrajets.columns

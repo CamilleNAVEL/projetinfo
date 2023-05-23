@@ -1,7 +1,6 @@
 import pandas as pd
 
-def filtre_ter(table, tarif_lib=[], tarif_type=[], departements=[],
-                regions=[]):
+def filtre_ter(table, tarif_lib=[], tarif_type=[]):
     """Filtre les lignes TER de la table des trajets selon les critères choisis.
     
     Parameters
@@ -12,10 +11,7 @@ def filtre_ter(table, tarif_lib=[], tarif_type=[], departements=[],
         liste des tarifs appliqués retenus, si la liste est vide on ne filtre pas.
     tarif_type : list[str]
         liste des types de tarif retenues, si la liste est vide on ne filtre pas.
-    departements : list[str]
-        liste des départements retenus, si la liste est vide on ne filtre pas.
-    regions : list[str]
-        liste des régions retenues, si la liste est vide on ne filtre pas.
+
             
     Returns
     -------
@@ -25,15 +21,10 @@ def filtre_ter(table, tarif_lib=[], tarif_type=[], departements=[],
     df=table[table.type == 'TER']
     
     if tarif_lib != []:
-        df = df[df.Transporteur.isin(tarif_lib)]
+        df = df[df.tarif_lib.isin(tarif_lib)]
     if tarif_type != []:
-        df = df[df.Classe.isin(tarif_type)] 
-    if departements !=[]:
-        # A faire
-        pass
-    if regions !=[]:
-        # A faire
-        pass
+        df = df[df.tarif_type.isin(tarif_type)] 
+
            
     res=pd.concat([df,table[table.type != 'TER']])
     
