@@ -1,64 +1,56 @@
-from math import inf
-def dijkstra_source_vers_destination(self, origine, destination):
-    """
-    Applique l’algo de Dijkstra pour relier à moindre coût origine à destination.
-    Arguments
-    graphe : Graphe
-    le graphe des trajets.
-    origine : str
-    Code UIC de la gare d’origine.
-    Destination : str
-    code UIC de la gare de destination.
-    Renvoie
-    Un parcours (cf classe parcours).
-    """
-    parcours = []  # Contiendra le nom des sommets visités
- 
-    # Distance minimale trouvée pour chaque valeur dès le départ
-    distances = {sommet: (None, inf) for sommet in self}
-    #     Sommet d'origine (None par défaut), distance
- 
-    distances[origine] = 0  # On initialise la distance du départ
- 
-    # Nombre de sommets du graphe, longueur du dictionnaire
-    taille_graph = len(self)
- 
-    selection = origine
-    coefficient = 0
- 
-    while len(parcours) < taille_graph:
-        # On marque la 'selection'
-        parcours.append(selection)
-        # On parcours les voisins de 'selection'
-        for voisin in self.origine[selection]:
-            # voisin est le tuple (origine, code_origine, destination , code_destination , prix)
-            sommet = voisin.origine  # Le sommet qu'on, parcours
-            poids = voisin.prix  # Le poids de selection au sommet
-            # voir ici comment on accède aux données du graphe
-            if sommet not in parcours:
-                # Pour chaque voisin non marqué,
-                # on compare coefficient + arête
-                # avec la distance du dictionnaire
-                d = distances[sommet][1]
-                if coefficient + poids < d:
-                    # Si c'est plus petit, on remplace
-                    distances[sommet] = (selection, coefficient + poids)
-        # On recherche le minimum parmi les non marqués
-        selection = None
-        minimum = inf
-        for sommet in self:
-            if sommet not in parcours and distances[sommet][1] < minimum[1]:
-                selection = sommet
-                minimum = distances[sommet][1]
- 
-        # puis il devient notre nouvelle 'selection' 
-    sommet = destination
-    parcours += [destination]
-    longueur = distances[destination][1]
-    # On parcours le graphe à l'envers pour obtenir le chemin
-    while sommet != origine:
-        sommet = distances[sommet][0]
-        parcours.append(sommet)
-    parcours.reverse()
-    # On renvoie le chemin le plus court
-    return parcours
+import pandas as pd
+import numpy as np
+
+
+def dijkstra_source_vers_destination(graphe, origine, destination):
+    # Initialisation
+    noeuds = np.unique(list(np.concatenate([graphe['origine'], graphe['destination']]).flat))
+    print(noeuds)
+    distances = {noeud: np.inf for noeud in noeuds}
+    print(distances)
+    distances[origine] = 0
+    print(distances)
+    predecesseurs = {noeud: origine for noeud in noeuds}
+    visite = set()
+
+    # Algorithme de Dijkstra
+    while visite != set(noeuds):
+        # Sélectionner le nœud avec la distance minimale non visitée
+        noeud_courant = min(
+            set(distances.keys()) - visite, key=lambda x: distances[x]
+        )
+        visite.add(noeud_courant)
+
+        # Mettre à jour les distances des nœuds voisins
+        voisins = graphe[
+            (graphe['origine'] == noeud_courant) | (graphe['destination'] == noeud_courant)
+        ]
+        for _, voisin in voisins.iterrows():
+            if voisin['origine'] == noeud_courant:
+                noeud_voisin = voisin['destination']
+            else:
+                noeud_voisin = voisin['origine']
+
+            if noeud_voisin not in visite:
+                nouveau_prix = distances[noeud_courant] + voisin['prix']
+                if nouveau_prix < distances[noeud_voisin]:
+                    predecesseurs[noeud_voisin] = noeud_courant  # Mettre à jour le prédécesseur
+                    distances[noeud_voisin] = nouveau_prix  # Mettre à jour la distance
+        print(distances)      
+
+    # Récupérer le chemin optimal de destination vers l'origine
+    chemin_optimal = []
+    noeud_actuel = destination
+    while noeud_actuel != origine:
+        chemin_optimal.insert(0, noeud_actuel)
+        noeud_actuel = predecesseurs[noeud_actuel]
+    chemin_optimal.insert(0, origine)
+
+    # Résultats
+    print("Distances minimales :")
+    for noeud, distance in distances.items():
+        print(f"{noeud}: {distance}")
+    
+    print("\nChemin optimal :")
+    print(" -> ".join(chemin_optimal))
+
