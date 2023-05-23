@@ -1,0 +1,2 @@
+Générer les requirements :
+pip freeze > requirements.txt
