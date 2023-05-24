@@ -16,15 +16,14 @@ def creation_tableCorrespondances():
     tableVoyageurs = pd.read_csv(os.path.join("preparationdata/data","referentiel-gares-voyageurs.csv"),sep=";",
                              dtype={'Code UIC': str,'Code Commune': str,'Code département': str})
     tableVoyageurs.columns = [c.replace(' ','_') for c in tableVoyageurs.columns]
-    # del gares
+    
 
     garesTGV=creation_tableTGV()[["origine","code_origine"]]
     garesTGV.drop_duplicates(keep = 'first', inplace=True)
     gares=tableVoyageurs[["Code_UIC","Code_département","Code_Commune"]]
     
     gares=gares.assign(Code_UIC = lambda df: df['Code_UIC'].str[2:])
-    # gares['Code_UIC']=gares['Code_UIC'].str[2:]
-
+   
     gares=gares.merge(garesTGV,left_on="Code_UIC",right_on="code_origine",suffixes=(True,True))
     
     gares['codecom']=gares['Code_département'] + gares['Code_Commune']
