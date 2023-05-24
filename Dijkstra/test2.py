@@ -20,8 +20,18 @@ table11[["reg_destination","dep_destination","type"]].value_counts()
 table11
 dijkstra_source_vers_destination(table11, "RENNES", "BREST")
 
+# Trajets TGV
+table3=filtre_type(tableTrajets, delete="TER")
+table3=appurement_correspondances(table3)
+table3[["type"]].value_counts()
+dijkstra_source_vers_destination(table3, "LILLE FLANDRES", "POITIERS")
+dijkstra_source_vers_destination(table3, "POITIERS", "LILLE FLANDRES")
+dijkstra_source_vers_destination(table3, "REIMS", "LE MANS")
 
 # Ensemble des trajets possibles
 table1=appurement_correspondances(tableTrajets)
 table1[["type"]].value_counts()
 dijkstra_source_vers_destination(table1, "RENNES", "STRASBOURG")
+
+dijkstra_source_vers_destination(table1, "RENNES", "PAIMPOL")
+
