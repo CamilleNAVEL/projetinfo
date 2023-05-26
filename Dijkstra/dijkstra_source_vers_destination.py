@@ -1,6 +1,5 @@
 import pandas as pd
 import numpy as np
-from main import graphe
 
 def dijkstra_source_vers_destination(graphe, origine, destination):
     # Initialisation
@@ -43,10 +42,10 @@ def dijkstra_source_vers_destination(graphe, origine, destination):
     chemin_optimal.insert(0, origine)
 
     # Résultats
-    print("Distances minimales :")
-    for noeud, distance in distances.items():
-        print(f"{noeud}: {distance}")
+    print("Prix minimal")
+    print(distances[destination],'\u20AC' )
     
     print("\nChemin optimal :")
     print(" -> ".join(chemin_optimal))
+    print("\n\n")
 
